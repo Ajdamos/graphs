@@ -1,11 +1,11 @@
 import { getPathRecursive } from "./getPathRecursive"
 
-export function solverSingle(maze, start, end){
+export function solverSingle(data, start, end){
     let queue = [start]
     let paths = {[start]: 0}
-    for (let node = 0; node < Object.keys(maze).length; node++){
+    for (let node = 0; node < Object.keys(data).length; node++){
         
-        maze[queue[node]].forEach(neighbour => {
+        data[queue[node]].forEach(neighbour => {
             if(!Object.keys(paths).includes(neighbour.toString())) {
                 paths[neighbour] = queue[node]   
             }

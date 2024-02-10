@@ -1,16 +1,12 @@
-import { useEffect } from "react"
-import { Landing } from "./pages/Landing"
-import { solverSingle } from "./utils/solverSingle"
-import data from "./data/mazeSingle"
-import { Canvas } from "./components/Canvas"
+import { RouterProvider } from "react-router-dom"
+import { Navigation } from "./components/Navigation"
+import { router } from "./utils/Router"
+
 function App() {
-
-  useEffect(() => {
-    console.log(solverSingle(data, 1, 12))
-  } ,[])
-
-  return (    
-    <Canvas />
+  return ( 
+    <>
+      <RouterProvider router={router}/>
+    </>   
   )
 }
 
