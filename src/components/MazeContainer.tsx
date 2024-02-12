@@ -7,10 +7,9 @@ import { useEffect } from 'react';
 import mazeTemplateData from '../data/mazeTemplateData';
 
 export const MazeContainer = (props) => {
-
+  const { size } = props
   const mazeSize = UseWindowSize() //array [width of maze, height of maze]
   const [maze, setMaze] = useMaze(props.size)
-  const mouse = useMouse()
   const handleMazeChange = (row, col) => {
     setMaze(old => {
     const temp = [...old]
@@ -19,9 +18,13 @@ export const MazeContainer = (props) => {
     })
   }
 
+  function handleReset() {
+    setMaze([...Array(mazeTemplateData[size as keyof typeof mazeTemplateData].rows)].map(() => Array(mazeTemplateData[size as keyof typeof mazeTemplateData].cols).fill(1)))
+  }
+
   useEffect(() => {
-    //todo mouse over points
-  }, [])
+    handleReset()
+  }, [size])
   
 
   return (
@@ -30,7 +33,6 @@ export const MazeContainer = (props) => {
         maze.map((row, rowI: number) => {
           return (
             <div className='flex' key={rowI} >
-              <h1>{mouse[0] +  " / " +  mouse[1]}</h1>
               {row.map((identifier: number, colI: number) => (
                 <MazeCell 
                   key=  {colI + " " + rowI} 
