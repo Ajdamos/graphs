@@ -17,37 +17,44 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
+export const ButtonBlue: Story = {
+  args:{
     label: 'Button',
-  },
-};
+    color: 'blue',
+    size: 'medium',
+  }
+}
 
-export const White: Story = {
+
+export const ButtonBlack: Story = {
   args: {
     label: 'Button',
-    backgroundColor: 'white',
+    color: 'black',
     size: 'medium',
 
   },
 };
 
-export const Secondary: Story = {
+export const ButtonGreen: Story = {
   args: {
     label: 'Button',
+    color: 'green',
+    size: 'medium',
   },
 };
 
-export const Large: Story = {
+export const ButtonOrange: Story = {
   args: {
-    size: 'large',
     label: 'Button',
+    color: 'orange',
+    size: 'medium',
   },
 };
 
-export const Small: Story = {
+export const ButtonRed: Story = {
   args: {
-    size: 'small',
     label: 'Button',
+    color: 'red',
+    size: 'medium',
   },
 };

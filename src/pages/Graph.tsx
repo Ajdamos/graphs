@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Canvas } from '../components/Canvas';
+import { GraphCanvas } from '../components/GraphCanvas';
 import { GraphMenu } from '../components/GraphMenu';
 
 export const Graph = () => {
@@ -8,10 +8,11 @@ export const Graph = () => {
     const [mode, setMode] = useState("addPoint")
     const [points, setPoints] = useState([])
     const [pathPoints, setPathPoints] = useState([0, 0])
+    const [resultPath, setResultPath] = useState([])
     const [chosenPoints, setChosenPoints] = useState([0, 0])
     return (
         <div className='flex'>
-            <Canvas 
+            <GraphCanvas 
                 mode={mode}
                 setMode={setMode}
                 points={points}
@@ -19,17 +20,17 @@ export const Graph = () => {
                 pathPoints={pathPoints}
                 setPathPoints={setPathPoints}
                 chosenPoints={chosenPoints}
-                setChosenPoints={setChosenPoints}   
+                setChosenPoints={setChosenPoints}
+                resultPath={resultPath}   
                 />
             <GraphMenu 
-                mode={mode}
                 setMode={setMode}
                 points={points}
                 setPoints={setPoints}
                 pathPoints={pathPoints}
                 setPathPoints={setPathPoints}
-                chosenPoints={chosenPoints}
-                setChosenPoints={setChosenPoints}   
+                resultPath={resultPath}  
+                setResultPath={setResultPath} 
                 />
         </div>
     )
