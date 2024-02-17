@@ -3,7 +3,7 @@ import { Navigation } from "./Navigation";
 
 export const NavbarWrapper = () => {
     return (
-    <div>
+    <div className="overflow-hidden w-full h-full bg-lightTeal">
         <Navigation/>
         <Outlet/>
     </div>

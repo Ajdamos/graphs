@@ -47,15 +47,37 @@ export const GraphCanvas = (props) => {
             case "addConnection":
                 addConnection(e)
                 break;
+            case "deletePoint":
+                deletePoint(e)
+                break;
         }
     }
+    const deletePoint = (e: React.MouseEvent<HTMLElement>) => {
+        const x = e.clientX - e.currentTarget.getBoundingClientRect().x
+        const y = e.clientY - e.currentTarget.getBoundingClientRect().y
+        const foundPoint = points.find((item: Point) => getCircleDistance(x, y ,item.x, item.y) < 20)
+        if(foundPoint !== undefined) {
+            console.log(points)
+            let newPoints = points.filter((item: Point) => item.id !== foundPoint.id)
+            newPoints = newPoints.map((item: Point) => {
+                item.connections = item.connections.filter((connection: number) => connection !== foundPoint.id)
+                if(item.id > foundPoint.id) item.id -= 1
+                return item
+            })
+
+            setPoints(newPoints)
+        }
+    }
+    console.log(resultPath)
 
     const addConnection = (e: React.MouseEvent<HTMLElement>) => {
         const x = e.clientX - e.currentTarget.getBoundingClientRect().x
         const y = e.clientY - e.currentTarget.getBoundingClientRect().y
         
         const foundPoint = points.find((item: Point) => getCircleDistance(x, y ,item.x, item.y) < 20)
+        console.log(chosenPoints)
         if(chosenPoints[0] === null && foundPoint !== undefined) return setChosenPoints([foundPoint.id, null])
+        console.log("xd")
         if(chosenPoints[0] !== null && chosenPoints[0] !== foundPoint?.id && foundPoint !== undefined) {
             const newPoints = points.map((item: Point) => {
                 if(item.id === chosenPoints[0]) {
@@ -83,8 +105,22 @@ export const GraphCanvas = (props) => {
     }
     
 return (
-    <>
-        <canvas className='m-[100px] border-2 border-black' ref={canvasRef} onClick={handleModeExecution} width={500} height={500} />
-    </>
+    <div className='flex flex-col items-center h-full justify-around bg-lightTeal overflow-hidden'>
+
+        <canvas 
+            className='mx-[100px] my-[50px] border-2 border-black bg-white' 
+            ref={canvasRef} 
+            onClick={handleModeExecution} 
+            width={window.innerWidth - 200} 
+            height={window.innerHeight - 328} 
+            />
+        {   
+            resultPath.length ?
+            <div className='p-4 bg-darksm rounded-xl'>
+                <div className='flex justify-center h-3 items-center text-lightTeal font-bold text-2xl m-2'>{resultPath.join(" → ")}</div>
+            </div> :
+            null
+        }
+    </div>
 )
 }

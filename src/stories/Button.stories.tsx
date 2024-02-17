@@ -25,6 +25,15 @@ export const ButtonBlue: Story = {
   }
 }
 
+export const ButtonDarkSM: Story = {
+  args: {
+    label: 'Button',
+    color: '#2E4F4F',
+    size: 'medium',
+    backgroundColor: '#CBE4DE',
+  },
+};
+
 
 export const ButtonBlack: Story = {
   args: {

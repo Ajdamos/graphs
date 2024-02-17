@@ -1,39 +1,33 @@
-import { MazeCell } from './MazeCell';
+import { MazeCell } from './primitive/MazeCell';
 import { UseWindowSize } from '../hooks/useWindowSize';
-import { useMaze } from '../hooks/useMaze';
 import  IdentifierTemplate  from '../data/mazeIdentifierData';
-import { useMouse } from '../hooks/useMouse';
-import { useEffect } from 'react';
-import mazeTemplateData from '../data/mazeTemplateData';
+
 
 export const MazeContainer = (props) => {
-  const { size } = props
-  const mazeSize = UseWindowSize() //array [width of maze, height of maze]
-  const [maze, setMaze] = useMaze(props.size)
-  const handleMazeChange = (row, col) => {
-    setMaze(old => {
-    const temp = [...old]
-    temp[row][col] = IdentifierTemplate[props.mode]
-    return temp
+  const { 
+    mode,
+    maze,
+    setMaze
+  } = props
+
+  const mazeSize = UseWindowSize() 
+
+  const handleMazeChange = (row: number, col: number) => {
+    setMaze((old: number[][]) => {
+      const temp = [...old]
+      temp[row][col] = IdentifierTemplate[mode as keyof typeof IdentifierTemplate]
+      return temp
     })
   }
 
-  function handleReset() {
-    setMaze([...Array(mazeTemplateData[size as keyof typeof mazeTemplateData].rows)].map(() => Array(mazeTemplateData[size as keyof typeof mazeTemplateData].cols).fill(1)))
-  }
-
-  useEffect(() => {
-    handleReset()
-  }, [size])
-  
-
   return (
-    <div className='flex flex-col' style={{height: mazeSize[1]}}>
+    <div className='flex flex-col bg-lightBlue' style={{height: mazeSize[1]}}>
       {
         maze.map((row, rowI: number) => {
           return (
-            <div className='flex' key={rowI} >
-              {row.map((identifier: number, colI: number) => (
+            <div className='flex' key={rowI} draggable={false} >
+              {
+              row.map((identifier: number, colI: number) => (
                 <MazeCell 
                   key=  {colI + " " + rowI} 
                   style={{width: mazeSize[0]/maze[0].length, height: mazeSize[1]/maze.length}} 
@@ -42,7 +36,8 @@ export const MazeContainer = (props) => {
                   identifier={identifier}
                   changeMaze={handleMazeChange}
                   />
-        ))}
+              ))
+              }
             </div>
           );
         })

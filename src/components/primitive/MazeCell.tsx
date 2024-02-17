@@ -1,35 +1,33 @@
 import { useState } from "react"
-import IdentifierTemplate from "../data/mazeIdentifierData"
 type MazeCellProps = {
     identifier: number // 1 empty, 2 block, 3 start, 4 end
     row: number
     col: number
     style: {width: number, height: number}
+    changeMaze: (row: number, col: number) => void
 }
 export const MazeCell = (props: MazeCellProps) => {
 
-    const {
-        identifier
-    } = props
-
-    
     const handleIdentifierBackground = () => {
         let color;
         switch (props.identifier) {
             case 1:
-                color = "white"
+                color = "#CBE4DE"
                 break;
             case 2:
-                color = "orange"
+                color = "#2E4F4F"
                 break;
             case 3:
-                color = "MediumSeaGreen"
+                color = "DarkGreen"
                 break;
             case 4:
-                color = "Tomato"
+                color = "FireBrick"
                 break;
             case 5:
-                color = "DodgerBlue"
+                color = "MediumSlateBlue"
+                break;
+            case 6:
+                color = "LightGreen"
                 break;
         }
         return color
@@ -38,19 +36,18 @@ export const MazeCell = (props: MazeCellProps) => {
     const [hover, setHover] = useState(false)
     const style = {
         ...props.style,
-        backgroundColor: hover && identifier === 1 ? "LightGray" : handleIdentifierBackground()
+        backgroundColor: hover && props.identifier === 1 ? "LightGray" : handleIdentifierBackground()
     }
 
     
 
     return (
-        <div 
-            className="flex justify-center items-center font-bold border-black border-2 transition" 
+        <div className="flex justify-center items-center font-bold border-[#111] border transition" 
             style={style}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
             onClick={() => props.changeMaze(props.row, props.col)}
             >
-            </div>
+        </div>
     )
 } 

@@ -1,6 +1,5 @@
 import { RouterProvider } from "react-router-dom"
-import { Navigation } from "./components/Navigation"
-import { router } from "./utils/Router"
+import { router } from "./services/Router"
 
 function App() {
   return ( 

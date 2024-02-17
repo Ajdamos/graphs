@@ -1,4 +1,5 @@
-import { ButtonBlack, ButtonBlue, ButtonRed } from "../stories/Button.stories"
+import { ButtonDarkSM } from "../stories/Button.stories"
+import { AiOutlineArrowRight } from "react-icons/ai";
 import Button from "./primitive/Button"
 import ExampleData from "../data/sampleDataGraph"
 import findPath from "../utils/findPath";
@@ -13,7 +14,6 @@ export const GraphMenu = (props) => {
         pathPoints,
         setPathPoints,
         setMode,
-        resultPath,
         setResultPath
         } = props
 
@@ -22,30 +22,36 @@ export const GraphMenu = (props) => {
     }
     const clear = () => {
         setPoints([])
+        setResultPath([])
     }
     const setStart = (start: number) => {
-        setPathPoints([start, pathPoints[1]])
+        setPathPoints((old: number[]) =>  [start, old[1]])
     }
     const setEnd = (end: number) => {
-        setPathPoints([pathPoints[0], end])
+        setPathPoints((old: number[]) => [old[0], end])
     }
     const handleResultPath = () => {
-        setResultPath(findPath(points, pathPoints[0], pathPoints[1]))
+        console.log(pathPoints)
+        const result = findPath(points, pathPoints[0], pathPoints[1])
+        result.pop()
+        setResultPath(result)
     }
 
     return (
-        <div className='flex flex-col items-center'>
-            
-            <Button {...ButtonBlue.args} label="Points" onClick={() => setMode("addPoint")} />
-            <Button {...ButtonBlack.args} label="Connections" onClick={() => setMode("addConnection")} />
-            <Button {...ButtonRed.args} label="Path" onClick={handleResultPath} />
-            <Button {...ButtonRed.args} label="Example" onClick={setExample}/>
-            <Button {...ButtonRed.args} label="Clear"  onClick={clear}/>
-            <div className="flex">
-                <DropMenu label="Start" options={points.map((item: Point) => item.id)} onChange={setStart}/>
-                <DropMenu label="Start" options={points.map((item: Point) => item.id)} onChange={setEnd}/>
+        <div className='flex items-center justify-center gap-8 px-8 h-16 bg-darksm'>
+            <div className="flex justify-center bg-lightTeal p-2 rounded-xl gap-2">
+                <Button {...ButtonDarkSM.args} label="Points" onClick={() => setMode("addPoint")} />
+                <Button {...ButtonDarkSM.args} label="Connections" onClick={() => setMode("addConnection")} />
+                <Button {...ButtonDarkSM.args} label="Delete" onClick={() => setMode("deletePoint")} />
+                <Button {...ButtonDarkSM.args} label="Example" onClick={setExample}/>
+                <Button {...ButtonDarkSM.args} label="Clear"  onClick={clear}/>
             </div>
-            <h1>{resultPath}</h1>
+            <div className="flex justify-center bg-lightTeal p-2 rounded-xl gap-2">
+                <DropMenu label="Start" options={points.map((item: Point) => item.id)} onChange={setStart}/>
+                <AiOutlineArrowRight size="35" color="#2E4F4F"/>
+                <DropMenu label="End" options={points.map((item: Point) => item.id)} onChange={setEnd}/>
+                <Button {...ButtonDarkSM.args} label="Path" onClick={handleResultPath} />
+            </div>
         </div>
 
     )
