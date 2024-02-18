@@ -14,7 +14,11 @@ export const MazeContainer = (props) => {
 
   const handleMazeChange = (row: number, col: number) => {
     setMaze((old: number[][]) => {
-      const temp = [...old]
+      let temp = [...old]
+      temp = temp.map((row: number[]) => row.map((col: number) => {
+        if(col === 5 || col === 6) col = 1
+        return col
+      }))
       temp[row][col] = IdentifierTemplate[mode as keyof typeof IdentifierTemplate]
       return temp
     })

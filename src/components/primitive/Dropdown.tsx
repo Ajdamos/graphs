@@ -2,8 +2,8 @@ import Dropdown from 'react-dropdown';
 
 type DropMenuProps = {
     label: string, 
-    options: [number], 
-    onChange: void
+    options: number[], 
+    onChange: () => void
 }
 
 const DropMenu = (props: DropMenuProps) => {

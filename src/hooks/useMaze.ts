@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+ import { useEffect, useState } from "react"
 import Template from '../data/mazeTemplateData'
 import IdentifierTemplate from '../data/mazeIdentifierData'
 import { useMouse } from "./useMouse"
@@ -18,7 +18,13 @@ export const useMaze = (size, mode) => {
         const x: number = Math.ceil(mouse[0] / (window.innerWidth / Template[size].cols))
         if(y < 1 || y > Template[size].rows || x < 1 || x > Template[size].cols) return
         setMaze(old => {
-            const temp = [...old]
+            let temp = [...old]
+            if( mode === "start" || mode === "end"){
+                temp = temp.map((row: number[]) => row.map((col: number) => {
+                if(col === IdentifierTemplate[mode]) col = 1
+                return col
+            }))
+            }   
             temp[y - 1][x - 1] = IdentifierTemplate[mode]
             return temp
     })}, [mouse])

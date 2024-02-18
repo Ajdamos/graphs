@@ -1,17 +1,10 @@
-import { NavListItem } from "./primitive/NavListItem"
 import { useState } from "react"
-
+import { NavListItem } from "./primitive/NavListItem"
 export const Navigation = () => {
 
-    const [path, setPath] = useState("")
+    const [path, setPath] = useState(window.location.pathname.slice(1))
 
-    
-    
-    const isCurrent = (page: string) => {
-        return page === path       
-    }
-
-
+    const isCurrent = (page: string) => page === path
 
     return (
         <ul className="flex items-center justify-center w-full bg-darksm h-16 px-64">

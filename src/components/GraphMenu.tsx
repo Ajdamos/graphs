@@ -31,8 +31,7 @@ export const GraphMenu = (props) => {
         setPathPoints((old: number[]) => [old[0], end])
     }
     const handleResultPath = () => {
-        console.log(pathPoints)
-        const result = findPath(points, pathPoints[0], pathPoints[1])
+        const result = findPath(points, pathPoints[1], pathPoints[0])
         result.pop()
         setResultPath(result)
     }

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { getCircleDistance } from '../utils/getCircleDistance';
+import { nodeDistance } from '../utils/nodeDistance';
 import { Point } from '../types/Graph';
 
 export const GraphCanvas = (props) => {
@@ -55,9 +55,8 @@ export const GraphCanvas = (props) => {
     const deletePoint = (e: React.MouseEvent<HTMLElement>) => {
         const x = e.clientX - e.currentTarget.getBoundingClientRect().x
         const y = e.clientY - e.currentTarget.getBoundingClientRect().y
-        const foundPoint = points.find((item: Point) => getCircleDistance(x, y ,item.x, item.y) < 20)
+        const foundPoint = points.find((item: Point) => nodeDistance([x, y], [item.x, item.y]) < 20)
         if(foundPoint !== undefined) {
-            console.log(points)
             let newPoints = points.filter((item: Point) => item.id !== foundPoint.id)
             newPoints = newPoints.map((item: Point) => {
                 item.connections = item.connections.filter((connection: number) => connection !== foundPoint.id)
@@ -68,16 +67,13 @@ export const GraphCanvas = (props) => {
             setPoints(newPoints)
         }
     }
-    console.log(resultPath)
 
     const addConnection = (e: React.MouseEvent<HTMLElement>) => {
         const x = e.clientX - e.currentTarget.getBoundingClientRect().x
         const y = e.clientY - e.currentTarget.getBoundingClientRect().y
         
-        const foundPoint = points.find((item: Point) => getCircleDistance(x, y ,item.x, item.y) < 20)
-        console.log(chosenPoints)
+        const foundPoint = points.find((item: Point) => nodeDistance([x, y], [item.x, item.y]) < 20)
         if(chosenPoints[0] === null && foundPoint !== undefined) return setChosenPoints([foundPoint.id, null])
-        console.log("xd")
         if(chosenPoints[0] !== null && chosenPoints[0] !== foundPoint?.id && foundPoint !== undefined) {
             const newPoints = points.map((item: Point) => {
                 if(item.id === chosenPoints[0]) {
@@ -100,7 +96,7 @@ export const GraphCanvas = (props) => {
             id: points.length + 1, 
             connections: []
         }
-        if(points.some((item: Point) => getCircleDistance(newPoint.x, newPoint.y, item.x, item.y) < 50)) return
+        if(points.some((item: Point) => nodeDistance([newPoint.x, newPoint.y], [item.x, item.y]) < 50)) return
         setPoints((old: [Point]) => [...old, newPoint])
     }
     

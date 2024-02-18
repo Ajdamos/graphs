@@ -20,7 +20,7 @@ export const MazeMenu = (props) => {
                 <Button {...ButtonDarkSM.args}  onClick={() => setMode("delete")} label="Delete"  />
             </div>
             <div className="flex justify-center bg-lightTeal p-2 rounded-xl gap-2">
-                <Button {...ButtonDarkSM.args}  onClick={() => setRun((old: boolean) => !old)}  label="Start"  />
+                <Button {...ButtonDarkSM.args}  onClick={() => setRun((old: boolean) => !old)}  label="Run"  />
                 <Button {...ButtonDarkSM.args} onClick={() => setReset((old: boolean) => !old)}  label="Clear"  />
             </div>
             <div className="flex justify-center bg-lightTeal p-2 rounded-xl gap-2">

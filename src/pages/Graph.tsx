@@ -4,7 +4,6 @@ import { GraphCanvas } from '../components/GraphCanvas';
 import { GraphMenu } from '../components/GraphMenu';
 
 export const Graph = () => {
-
     const [mode, setMode] = useState("addPoint")
     const [points, setPoints] = useState([])
     const [pathPoints, setPathPoints] = useState([1, 1])

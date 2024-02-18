@@ -1,4 +1,4 @@
-import { getPathRecursive } from "./getPathRecursive"
+import { pathRecursive } from "./pathRecursive"
 
 export function solverSingle(data, start, end){
     const queue = [start]
@@ -16,5 +16,5 @@ export function solverSingle(data, start, end){
         
         
     }
-    return getPathRecursive(paths, end)
+    return pathRecursive(paths, end)
 }

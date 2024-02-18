@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { solveMaze } from "../utils/solveMaze";
-import { getMazeParentRecursive } from "../utils/getMazeParentRecursive";
+import { mazeParentRecursive } from "../utils/mazeParentRecursive";
 
 
 export const useSolveMaze = (maze: number[][], setMaze: (old: number[][]) => void) => {
@@ -9,7 +9,7 @@ export const useSolveMaze = (maze: number[][], setMaze: (old: number[][]) => voi
     useEffect(() => {
         function colorPath(position: number[], color: number) {
             if(maze[position[0]][position[1]] === 3 || maze[position[0]][position[1]] === 4) return
-            setMaze((old) => {
+            setMaze( old => {
                 const temp = [...old]
                 temp[position[0]][position[1]] = color
                 return temp
@@ -22,8 +22,8 @@ export const useSolveMaze = (maze: number[][], setMaze: (old: number[][]) => voi
                 setRun(false)
                 return
             }
-            const numbers = getMazeParentRecursive(checked[checked.length - 1])
-            const path = []
+            const numbers = mazeParentRecursive(checked[checked.length - 1])
+            const path: number[][] = []
             while(numbers.length > 0) {
                 path.push(numbers.splice(0, 2));
             }
