@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/utils/tests/nodeDistance.test.ts"],
+  "exclude": ["src", "src/utils/tests/nodeDistance.test.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
