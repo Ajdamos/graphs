@@ -10,7 +10,7 @@ export const Landing = () => {
             <p className="p-4 m-4 text-darksm text-3xl w-[60%] text-center">
                 V tomto projektu se podíváme na různé algoritmy pro hledání cest v grafu či bludišti, byl použit například A* nebo Breadth-first search.
             </p>
-            <a className="" href="https://github.com/Ajdamos/graphs" target="_blank">
+            <a href="https://github.com/Ajdamos/graphs" target="_blank">
                 <Button {...ButtonDarkSM.args} label="Github"/>
              </a>
         </div>
